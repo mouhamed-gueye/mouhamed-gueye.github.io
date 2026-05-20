@@ -1,688 +1,1056 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mouhamed GUEYE — Développeur Full-Stack & IA Médicale</title>
+  <title>Mouhamed GUEYE — Portfolio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #0d2137;
-      --teal:   #0097a7;
-      --teal-l: #e0f7fa;
-      --slate:  #455a64;
-      --light:  #f5f7fa;
-      --white:  #ffffff;
-      --border: #dde3ea;
-      --text:   #1c2b3a;
+      --navy:    #0d2137;
+      --navy2:   #112840;
+      --teal:    #0097a7;
+      --teal2:   #00bcd4;
+      --teal-l:  #e0f7fa;
+      --slate:   #455a64;
+      --light:   #f5f7fa;
+      --white:   #ffffff;
+      --border:  #dde3ea;
+      --text:    #1c2b3a;
+      --muted:   #78909c;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--light);
-      color: var(--text);
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
-
-    /* ── WRAPPER ── */
-    .page {
-      max-width: 950px;
-      margin: 32px auto;
       background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,.12);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--navy);
-      padding: 40px 48px 36px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 24px;
+    /* ══ NAV ══ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,33,55,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      padding: 0 48px;
+      height: 60px;
+      display: flex;
       align-items: center;
+      justify-content: space-between;
     }
 
-    header h1 {
-      font-size: 2.2rem;
+    .nav-logo {
       font-weight: 700;
+      font-size: 1rem;
       color: var(--white);
-      letter-spacing: -.5px;
+      letter-spacing: -.3px;
     }
+    .nav-logo span { color: var(--teal); }
 
-    header h1 span { color: var(--teal); }
-
-    .tagline {
-      margin-top: 6px;
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #90a4ae;
+      text-decoration: none;
       font-size: .85rem;
       font-weight: 500;
-      color: #90a4ae;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      transition: color .2s;
     }
+    .nav-links a:hover { color: var(--teal); }
 
-    .contacts {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      text-align: right;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      color: #b0bec5;
-      font-size: .82rem;
-    }
-
-    .contact-item .icon {
-      width: 18px;
-      height: 18px;
+    .nav-cv {
       background: var(--teal);
-      border-radius: 4px;
+      color: white !important;
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background .2s !important;
+    }
+    .nav-cv:hover { background: var(--teal2) !important; color: white !important; }
+
+    /* ══ HERO ══ */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .contact-item .icon svg { width: 10px; height: 10px; fill: white; }
-
-    .contact-item a { color: #b0bec5; text-decoration: none; }
-    .contact-item a:hover { color: var(--teal); }
-
-    /* ── BODY GRID ── */
-    .body {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-    }
-
-    /* ── SIDEBAR ── */
-    aside {
-      background: var(--navy);
-      padding: 32px 28px;
-      border-top: 1px solid #1e3a52;
-    }
-
-    /* ── MAIN ── */
-    main {
-      padding: 36px 40px;
-    }
-
-    /* ── SECTION TITLES ── */
-    .section-title {
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 14px;
-      padding-bottom: 6px;
-      border-bottom: 2px solid var(--teal-l);
-    }
-
-    aside .section-title {
-      color: #90a4ae;
-      border-bottom-color: #1e3a52;
-    }
-
-    .section { margin-bottom: 28px; }
-
-    /* ── SKILL BARS ── */
-    .skill { margin-bottom: 10px; }
-
-    .skill-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    .skill-name { font-size: .8rem; color: #cfd8dc; font-weight: 500; }
-    .skill-level { font-size: .72rem; color: #78909c; }
-
-    .bar-bg {
-      height: 5px;
-      background: #1e3a52;
-      border-radius: 99px;
+      padding: 80px 80px 60px;
+      position: relative;
       overflow: hidden;
     }
 
-    .bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--teal), #4dd0e1);
-      border-radius: 99px;
-    }
-
-    /* ── TAGS ── */
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-    .tag {
-      background: #1e3a52;
-      color: #90a4ae;
-      font-size: .73rem;
-      padding: 3px 10px;
-      border-radius: 99px;
-      font-weight: 500;
-    }
-
-    .tag.highlight {
-      background: var(--teal);
-      color: white;
-    }
-
-    /* ── LANGUAGE ── */
-    .lang-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .lang-name { font-size: .8rem; color: #cfd8dc; }
-    .lang-dots { display: flex; gap: 4px; }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #1e3a52;
-    }
-    .dot.filled { background: var(--teal); }
-
-    /* ── SOFT SKILLS ── */
-    .soft-list { list-style: none; }
-    .soft-list li {
-      font-size: .79rem;
-      color: #90a4ae;
-      padding: 3px 0;
-      padding-left: 12px;
-      position: relative;
-    }
-    .soft-list li::before {
-      content: '▸';
+    #hero::before {
+      content: '';
       position: absolute;
-      left: 0;
-      color: var(--teal);
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,151,167,.15) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    /* ── PROFILE SUMMARY ── */
-    .profile-text {
-      font-size: .85rem;
-      color: var(--slate);
-      background: var(--teal-l);
-      border-left: 3px solid var(--teal);
-      padding: 14px 16px;
-      border-radius: 0 8px 8px 0;
-      margin-bottom: 28px;
-      line-height: 1.7;
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: 10%;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,151,167,.08) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    /* ── TIMELINE ── */
-    .timeline { position: relative; }
-
-    .timeline-item {
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
       position: relative;
-      padding-left: 20px;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,151,167,.15);
+      border: 1px solid rgba(0,151,167,.3);
+      color: var(--teal2);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 99px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
       margin-bottom: 20px;
     }
 
-    .timeline-item::before {
+    .hero-badge::before {
       content: '';
-      position: absolute;
-      left: 0;
-      top: 7px;
-      width: 8px;
-      height: 8px;
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--teal);
-      flex-shrink: 0;
+      background: var(--teal2);
+      animation: pulse 2s infinite;
     }
 
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      left: 3.5px;
-      top: 16px;
-      width: 1px;
-      bottom: -12px;
-      background: var(--border);
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(1.4); }
     }
 
-    .timeline-item:last-child::after { display: none; }
+    .hero-title {
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 8px;
+    }
 
-    .item-header {
+    .hero-title span { color: var(--teal); }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #90a4ae;
+      font-weight: 500;
+      margin-bottom: 20px;
+      letter-spacing: .5px;
+    }
+
+    .hero-desc {
+      font-size: .95rem;
+      color: #b0bec5;
+      line-height: 1.8;
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    .hero-desc strong { color: var(--teal2); font-weight: 600; }
+
+    .hero-actions {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 8px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
-    .item-title {
-      font-size: .9rem;
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    .item-date {
-      font-size: .75rem;
-      color: var(--teal);
-      font-weight: 600;
-      white-space: nowrap;
-      background: var(--teal-l);
-      padding: 2px 8px;
-      border-radius: 99px;
-    }
-
-    .item-org {
-      font-size: .78rem;
-      color: var(--slate);
-      margin-top: 2px;
-      font-weight: 500;
-    }
-
-    .item-desc {
-      font-size: .8rem;
-      color: #607d8b;
-      margin-top: 5px;
-      line-height: 1.6;
-    }
-
-    .item-desc ul { list-style: none; padding: 0; }
-    .item-desc ul li { padding-left: 12px; position: relative; margin-bottom: 2px; }
-    .item-desc ul li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); }
-
-    /* ── PROJECT CARDS ── */
-    .project-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .project-card {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      background: var(--light);
-      transition: border-color .2s;
-    }
-
-    .project-card:hover { border-color: var(--teal); }
-
-    .project-card h4 {
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-
-    .project-card p {
-      font-size: .75rem;
-      color: var(--slate);
-      margin-bottom: 8px;
-      line-height: 1.5;
-    }
-
-    /* ── BADGE ── */
-    .badge {
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      font-size: .68rem;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: .88rem;
       font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 99px;
+      text-decoration: none;
+      transition: all .2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--teal2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,151,167,.4); }
+
+    .btn-outline {
+      background: transparent;
+      color: #90a4ae;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+    .hero-stats {
+      display: flex;
+      gap: 36px;
+      margin-top: 44px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    .stat-num {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-num span { color: var(--teal); }
+    .stat-label {
+      font-size: .75rem;
+      color: #607d8b;
+      margin-top: 3px;
       text-transform: uppercase;
       letter-spacing: .5px;
     }
 
-    .badge-teal  { background: var(--teal-l); color: var(--teal); }
-    .badge-navy  { background: #e8edf2; color: var(--navy); }
-    .badge-green { background: #e8f5e9; color: #2e7d32; }
-
-    /* ── PRINT ── */
-    @media print {
-      body { background: white; font-size: 12px; }
-      .page { margin: 0; border-radius: 0; box-shadow: none; max-width: 100%; }
-      .project-card:hover { border-color: var(--border); }
+    /* Photo */
+    .hero-photo-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    @media (max-width: 680px) {
-      .body { grid-template-columns: 1fr; }
-      .project-grid { grid-template-columns: 1fr; }
-      header { grid-template-columns: 1fr; }
-      .contacts { text-align: left; }
-      .contact-item { justify-content: flex-start; }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--teal), transparent 60%, var(--teal));
+      animation: spin 8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hero-photo-ring {
+      position: relative;
+      z-index: 1;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: var(--navy2);
+      padding: 4px;
+    }
+
+    .hero-photo-ring img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .hero-photo-deco {
+      position: absolute;
+      background: var(--navy2);
+      border: 2px solid rgba(0,151,167,.4);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--teal2);
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+    }
+
+    .deco-1 { bottom: 20px; left: -20px; }
+    .deco-2 { top: 30px; right: -20px; }
+
+    /* ══ SECTIONS COMMUNES ══ */
+    section { padding: 90px 80px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+
+    .section-lead {
+      font-size: .95rem;
+      color: var(--slate);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    .section-header { margin-bottom: 52px; }
+
+    /* ══ À PROPOS ══ */
+    #about { background: var(--light); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .about-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); border-color: var(--teal); }
+
+    .about-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--teal-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .about-card h4 { font-size: .9rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .about-card p  { font-size: .82rem; color: var(--slate); line-height: 1.6; }
+
+    .about-right h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .about-right p {
+      font-size: .9rem;
+      color: var(--slate);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .about-right strong { color: var(--teal); }
+
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .about-tag {
+      background: var(--teal-l);
+      color: var(--teal);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    /* ══ COMPÉTENCES ══ */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .skill-card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: all .2s;
+    }
+    .skill-card:hover { border-color: var(--teal); box-shadow: 0 4px 24px rgba(0,151,167,.1); }
+
+    .skill-card-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+    }
+
+    .skill-card h4 { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tag {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .tag-dark  { background: var(--navy); color: #90a4ae; }
+    .tag-teal  { background: var(--teal); color: white; }
+    .tag-light { background: var(--teal-l); color: var(--teal); }
+
+    /* ══ PROJETS ══ */
+    #projects { background: var(--light); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all .25s;
+    }
+    .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,.1); border-color: var(--teal); }
+
+    .project-card.featured {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .project-img {
+      height: 200px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card.featured .project-img { height: 100%; min-height: 220px; }
+
+    .project-img-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,151,167,.2) 0%, transparent 60%);
+    }
+
+    .project-body { padding: 24px; }
+
+    .project-category {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .project-body h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .project-body p  { font-size: .82rem; color: var(--slate); line-height: 1.7; margin-bottom: 16px; }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .project-tech { display: flex; flex-wrap: wrap; gap: 6px; }
+    .project-tech span {
+      font-size: .68rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 99px;
+      background: var(--light);
+      color: var(--slate);
+      border: 1px solid var(--border);
+    }
+
+    .project-link {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--teal);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap .2s;
+    }
+    .project-link:hover { gap: 8px; }
+
+    /* ══ PARCOURS ══ */
+    #journey { background: var(--navy); }
+    #journey .section-title { color: var(--white); }
+    #journey .section-lead  { color: #90a4ae; }
+    #journey .section-tag   { color: var(--teal2); }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .journey-col h4 {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 24px;
+    }
+
+    .journey-item {
+      position: relative;
+      padding-left: 20px;
+      padding-bottom: 24px;
+      border-left: 1px solid rgba(255,255,255,.1);
+    }
+
+    .journey-item::before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 5px;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .journey-item:last-child { border-left-color: transparent; }
+
+    .journey-date {
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--teal);
+      background: rgba(0,151,167,.15);
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    .journey-item h5 { font-size: .9rem; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .journey-item p  { font-size: .78rem; color: #78909c; }
+
+    /* ══ CONTACT ══ */
+    #contact { background: var(--light); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .contact-left p {
+      font-size: .92rem;
+      color: var(--slate);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .contact-link:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(0,151,167,.1); }
+
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-link-icon svg { width: 16px; height: 16px; fill: var(--teal); }
+
+    .contact-link-text strong { display: block; font-size: .85rem; font-weight: 600; color: var(--navy); }
+    .contact-link-text span   { font-size: .78rem; color: var(--muted); }
+
+    .contact-right {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 36px;
+      text-align: center;
+    }
+
+    .contact-right h3 { font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .contact-right p  { font-size: .85rem; color: #90a4ae; margin-bottom: 24px; line-height: 1.7; }
+
+    /* ══ FOOTER ══ */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding: 28px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    footer p { font-size: .8rem; color: #546e7a; }
+    footer span { color: var(--teal); }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero { padding: 80px 24px 60px; }
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo-ring { width: 220px; height: 220px; }
+      .hero-title { font-size: 2.4rem; }
+      section { padding: 60px 24px; }
+      .about-grid, .skills-grid, .journey-grid, .contact-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- ══════════════ HEADER ══════════════ -->
-  <header>
-    <div>
-      <h1>Mouhamed <span>GUEYE</span></h1>
-      <p class="tagline">Développeur Full-Stack &nbsp;·&nbsp; IA Médicale &nbsp;·&nbsp; Infirmier d'État</p>
-    </div>
-    <div class="contacts">
-      <div class="contact-item">
-        <span>gueye.mouhamed625@gmail.com</span>
-        <div class="icon">
-          <svg viewBox="0 0 20 20"><path d="M2 4l8 5 8-5V16H2V4zm0-2h16l-8 5L2 2z"/></svg>
-        </div>
-      </div>
-      <div class="contact-item">
-        <span>+221 776 083 670</span>
-        <div class="icon">
-          <svg viewBox="0 0 20 20"><path d="M2 3a2 2 0 012-2h1.5a1 1 0 01.97.757l.9 3.6a1 1 0 01-.27.99l-1.5 1.4a13 13 0 005.65 5.65l1.4-1.5a1 1 0 01.99-.27l3.6.9A1 1 0 0118 15.5V17a2 2 0 01-2 2C6.7 19 1 13.3 1 6a2 2 0 011-1z"/></svg>
-        </div>
-      </div>
-      <div class="contact-item">
-        <a href="https://github.com/mouhamed-gueye" target="_blank">github.com/mouhamed-gueye</a>
-        <div class="icon">
-          <svg viewBox="0 0 20 20"><path d="M10 0C4.48 0 0 4.48 0 10c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0110 4.84c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0020 10c0-5.52-4.48-10-10-10z"/></svg>
-        </div>
-      </div>
-      <div class="contact-item">
-        <span>Saly Aérodrome, Malicounda — Sénégal</span>
-        <div class="icon">
-          <svg viewBox="0 0 20 20"><path d="M10 1a6 6 0 016 6c0 4-6 12-6 12S4 11 4 7a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z"/></svg>
-        </div>
-      </div>
-    </div>
-  </header>
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-logo">Mouhamed <span>GUEYE</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#journey">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="cv.html" class="nav-cv" target="_blank">CV PDF</a></li>
+  </ul>
+</nav>
 
-  <div class="body">
-
-    <!-- ══════════════ SIDEBAR ══════════════ -->
-    <aside>
-
-      <!-- Compétences techniques -->
-      <div class="section">
-        <div class="section-title">Langages</div>
-        <div class="skill">
-          <div class="skill-header">
-            <span class="skill-name">Python</span>
-            <span class="skill-level">Avancé</span>
-          </div>
-          <div class="bar-bg"><div class="bar-fill" style="width:82%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span class="skill-name">Java</span>
-            <span class="skill-level">Avancé</span>
-          </div>
-          <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span class="skill-name">JavaScript</span>
-            <span class="skill-level">Intermédiaire</span>
-          </div>
-          <div class="bar-bg"><div class="bar-fill" style="width:65%"></div></div>
-        </div>
-        <div class="skill">
-          <div class="skill-header">
-            <span class="skill-name">SQL</span>
-            <span class="skill-level">Intermédiaire</span>
-          </div>
-          <div class="bar-bg"><div class="bar-fill" style="width:65%"></div></div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Frameworks &amp; Outils</div>
-        <div class="tags">
-          <span class="tag highlight">Spring Boot</span>
-          <span class="tag highlight">Django</span>
-          <span class="tag highlight">PyTorch</span>
-          <span class="tag">Angular</span>
-          <span class="tag">NumPy</span>
-          <span class="tag">Pandas</span>
-          <span class="tag">scikit-learn</span>
-          <span class="tag">Maven</span>
-          <span class="tag">Git / GitHub</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Docker</span>
-          <span class="tag">REST API</span>
-          <span class="tag">JUnit</span>
-          <span class="tag">Jira</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">IA Médicale</div>
-        <div class="tags">
-          <span class="tag highlight">CNN</span>
-          <span class="tag highlight">U-Net</span>
-          <span class="tag">Transfer Learning</span>
-          <span class="tag">GANs</span>
-          <span class="tag">Segmentation</span>
-          <span class="tag">DICOM / NIfTI</span>
-          <span class="tag">MONAI</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Bases de données</div>
-        <div class="tags">
-          <span class="tag">MySQL</span>
-          <span class="tag">SQLite</span>
-          <span class="tag">MongoDB</span>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Langues</div>
-        <div class="lang-item">
-          <span class="lang-name">Français</span>
-          <div class="lang-dots">
-            <div class="dot filled"></div><div class="dot filled"></div>
-            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
-          </div>
-        </div>
-        <div class="lang-item">
-          <span class="lang-name">Anglais</span>
-          <div class="lang-dots">
-            <div class="dot filled"></div><div class="dot filled"></div>
-            <div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
-          </div>
-        </div>
-        <div class="lang-item">
-          <span class="lang-name">Wolof</span>
-          <div class="lang-dots">
-            <div class="dot filled"></div><div class="dot filled"></div>
-            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">Soft Skills</div>
-        <ul class="soft-list">
-          <li>Empathie &amp; écoute active</li>
-          <li>Travail en équipe</li>
-          <li>Résolution de problèmes</li>
-          <li>Adaptabilité</li>
-          <li>Esprit critique</li>
-          <li>Leadership</li>
-          <li>Gestion du stress</li>
-        </ul>
-      </div>
-
-    </aside>
-
-    <!-- ══════════════ MAIN ══════════════ -->
-    <main>
-
-      <!-- Profil -->
-      <p class="profile-text">
-        Développeur Full-Stack passionné par <strong>Java et Python</strong>, avec une spécialisation émergente
-        en <strong>IA médicale</strong>. Mon parcours unique — double licence (informatique + sciences infirmières)
-        et expériences cliniques en structures de santé sénégalaises — me permet de comprendre à la fois
-        les contraintes techniques et les réalités du terrain médical.
-        Objectif : contribuer à des systèmes numériques de santé concrets et impactants en Afrique.
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">Disponible pour opportunités</div>
+      <h1 class="hero-title">Mouhamed<br/><span>GUEYE</span></h1>
+      <p class="hero-subtitle">Développeur Full-Stack · IA Médicale · Infirmier d'État</p>
+      <p class="hero-desc">
+        Je construis des solutions numériques à l'intersection du <strong>développement logiciel</strong>
+        et de la <strong>santé</strong>. Mon double parcours — informatique et sciences infirmières —
+        me permet d'adresser les vrais problèmes du terrain médical africain.
       </p>
-
-      <!-- Formation -->
-      <div class="section">
-        <div class="section-title">Formation</div>
-        <div class="timeline">
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Master 2 — Conception &amp; Développement Full-Stack</div>
-                <div class="item-org">Université Numérique Cheikh Hamidou Kane (UNCHK)</div>
-              </div>
-              <span class="item-date">2023 — Présent</span>
-            </div>
-            <div class="item-desc">
-              Architecture logicielle · Design Patterns · DevOps · Cloud · Mobile · Sécurité
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Licence — Informatique Développement d'Applications</div>
-                <div class="item-org">Université Numérique Cheikh Hamidou Kane (UNCHK)</div>
-              </div>
-              <span class="item-date">2019 — 2022</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Licence — Sciences Infirmières et Obstétricales <span class="badge badge-teal" style="margin-left:6px">Infirmier d'État</span></div>
-                <div class="item-org">Institut Supérieur de Santé de Mbour</div>
-              </div>
-              <span class="item-date">2019 — 2022</span>
-            </div>
-          </div>
-
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm1 11H9V9h2v4zm0-6H9V5h2v2z"/></svg>
+          Voir mes projets
+        </a>
+        <a href="cv.html" target="_blank" class="btn btn-outline">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 000 2h8a1 1 0 000-2H6zm0 4a1 1 0 000 2h4a1 1 0 000-2H6z"/></svg>
+          Télécharger le CV
+        </a>
+        <a href="https://github.com/mouhamed-gueye" target="_blank" class="btn btn-outline">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 0C4.48 0 0 4.48 0 10c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0110 4.84c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0020 10c0-5.52-4.48-10-10-10z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">2<span>+</span></div>
+          <div class="stat-label">Années dev</div>
+        </div>
+        <div>
+          <div class="stat-num">4<span>+</span></div>
+          <div class="stat-label">Projets</div>
+        </div>
+        <div>
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Ans clinique</div>
+        </div>
+        <div>
+          <div class="stat-num">10<span>w</span></div>
+          <div class="stat-label">SPARK AI</div>
         </div>
       </div>
+    </div>
 
-      <!-- Formation complémentaire -->
-      <div class="section">
-        <div class="section-title">Formation Complémentaire</div>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">SPARK Academy 2026 — IA Médicale <span class="badge badge-green" style="margin-left:6px">Certifié</span></div>
-                <div class="item-org">MAI Lab · Cameroon MRI Africa (en ligne)</div>
-              </div>
-              <span class="item-date">Fév — Mai 2026</span>
-            </div>
-            <div class="item-desc">
-              <ul>
-                <li>Programme intensif 10 semaines : Python, NumPy, Pandas, PyTorch</li>
-                <li>Deep learning médical : CNN, U-Net, GANs, Transfer Learning</li>
-                <li>Mini-challenges compétitifs : classification pneumonie (CXR), segmentation lésions mammaires</li>
-                <li>Travail sur données DICOM / NIfTI — formats cliniques réels</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-ring">
+        <img src="profil.jpg" alt="Mouhamed GUEYE"/>
       </div>
-
-      <!-- Expériences -->
-      <div class="section">
-        <div class="section-title">Expériences Professionnelles</div>
-        <div class="timeline">
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Infirmier d'État</div>
-                <div class="item-org">Poste de Santé Pointe Sarene</div>
-              </div>
-              <span class="item-date">Fév 2025 — Déc 2025</span>
-            </div>
-            <div class="item-desc">
-              Prise en charge des patients, soins d'urgence, gestion de dossiers médicaux.
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Infirmier d'État</div>
-                <div class="item-org">Cabinet Médical YA SALAM — Dr Souleymane Diop, Mbour</div>
-              </div>
-              <span class="item-date">Août 2024 — Fév 2025</span>
-            </div>
-          </div>
-
-          <div class="timeline-item">
-            <div class="item-header">
-              <div>
-                <div class="item-title">Infirmier — Service d'Accueil des Urgences</div>
-                <div class="item-org">Hôpital Thierno Mansour Barro de Mbour</div>
-              </div>
-              <span class="item-date">Sep 2023 — Mars 2024</span>
-            </div>
-            <div class="item-desc">
-              Triage et prise en charge des urgences médicales et chirurgicales.
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Projets -->
-      <div class="section">
-        <div class="section-title">Projets</div>
-        <div class="project-grid">
-
-          <div class="project-card">
-            <h4>e-TAC — Registres Médicaux IA</h4>
-            <p>Plateforme IA de numérisation et exploitation de registres médicaux papier. Hackathon gouvernemental — open source.</p>
-            <span class="badge badge-teal">Python</span>
-            <span class="badge badge-navy">IA / OCR</span>
-            <span class="badge badge-navy">Open Source</span>
-          </div>
-
-          <div class="project-card">
-            <h4>Site Web ASM Mbour</h4>
-            <p>Site officiel du club sportif ASM Mbour : gestion des actualités, résultats et contenus dynamiques.</p>
-            <span class="badge badge-teal">Django</span>
-            <span class="badge badge-navy">Python</span>
-            <span class="badge badge-navy">SQLite</span>
-          </div>
-
-          <div class="project-card">
-            <h4>Pneumonia CXR Classifier</h4>
-            <p>Modèle CNN de classification de radiographies pulmonaires (Normal vs Pneumonie) — SPARK Academy W7.</p>
-            <span class="badge badge-teal">PyTorch</span>
-            <span class="badge badge-navy">CNN</span>
-            <span class="badge badge-navy">Medical AI</span>
-          </div>
-
-          <div class="project-card">
-            <h4>Breast Lesion Segmentation</h4>
-            <p>Segmentation de lésions mammaires sur images échographiques avec U-Net + Transfer Learning — SPARK Academy W8/W9.</p>
-            <span class="badge badge-teal">PyTorch</span>
-            <span class="badge badge-navy">U-Net</span>
-            <span class="badge badge-navy">Medical AI</span>
-          </div>
-
-        </div>
-      </div>
-
-    </main>
+      <div class="hero-photo-deco deco-1">🩺 Infirmier d'État</div>
+      <div class="hero-photo-deco deco-2">⚕️ IA Médicale</div>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- ══════════ À PROPOS ══════════ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">À propos</div>
+      <h2 class="section-title">Un profil rare,<br/>deux expertises</h2>
+      <p class="section-lead">Développeur et infirmier d'État, je suis l'un des rares profils capables de comprendre à la fois le code et le soin.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="about-card">
+          <div class="about-icon">💻</div>
+          <div>
+            <h4>Développeur Full-Stack</h4>
+            <p>Java, Python, Spring Boot, Django, Angular. De l'API REST à l'interface utilisateur, je construis des applications complètes et robustes.</p>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🧠</div>
+          <div>
+            <h4>Spécialisation IA Médicale</h4>
+            <p>Formé à SPARK Academy 2026 — CNN, U-Net, Transfer Learning, GANs sur données médicales réelles (DICOM, NIfTI).</p>
+          </div>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🩺</div>
+          <div>
+            <h4>Infirmier d'État certifié</h4>
+            <p>3+ ans d'expérience clinique en urgences, cabinet médical et poste de santé. Je comprends les contraintes du terrain médical africain.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <h3>Pourquoi cette combinaison est un avantage</h3>
+        <p>La santé numérique en Afrique souffre d'un fossé entre les développeurs qui ne comprennent pas les besoins cliniques, et les soignants qui ne savent pas ce que la technologie peut faire.</p>
+        <p>Mon parcours me place <strong>exactement à cette intersection</strong> : je peux concevoir des outils qui répondent à de vraies problématiques médicales, avec une compréhension profonde des deux mondes.</p>
+        <p>C'est pour ça que j'ai co-créé <strong>e-TAC</strong> — une plateforme IA pour numériser les registres médicaux papier, pensée par et pour les acteurs de santé sénégalais.</p>
+        <div class="about-tags">
+          <span class="about-tag">Santé numérique</span>
+          <span class="about-tag">IA médicale</span>
+          <span class="about-tag">Open Source</span>
+          <span class="about-tag">Afrique</span>
+          <span class="about-tag">Full-Stack</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ COMPÉTENCES ══════════ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Stack technique</div>
+      <h2 class="section-title">Compétences</h2>
+      <p class="section-lead">Des langages backend aux modèles de deep learning, en passant par la chaîne DevOps.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">⚙️</div>
+        <h4>Backend</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-teal">Java</span>
+          <span class="skill-tag tag-teal">Python</span>
+          <span class="skill-tag tag-dark">Spring Boot</span>
+          <span class="skill-tag tag-dark">Django</span>
+          <span class="skill-tag tag-dark">REST API</span>
+          <span class="skill-tag tag-dark">Maven</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🎨</div>
+        <h4>Frontend</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-teal">JavaScript</span>
+          <span class="skill-tag tag-dark">Angular</span>
+          <span class="skill-tag tag-dark">HTML / CSS</span>
+          <span class="skill-tag tag-dark">TypeScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🧠</div>
+        <h4>IA & Machine Learning</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-teal">PyTorch</span>
+          <span class="skill-tag tag-teal">CNN</span>
+          <span class="skill-tag tag-teal">U-Net</span>
+          <span class="skill-tag tag-dark">scikit-learn</span>
+          <span class="skill-tag tag-dark">Transfer Learning</span>
+          <span class="skill-tag tag-dark">GANs</span>
+          <span class="skill-tag tag-dark">NumPy / Pandas</span>
+          <span class="skill-tag tag-light">DICOM / NIfTI</span>
+          <span class="skill-tag tag-light">MONAI</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🗄️</div>
+        <h4>Bases de données</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-dark">MySQL</span>
+          <span class="skill-tag tag-dark">SQLite</span>
+          <span class="skill-tag tag-dark">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🚀</div>
+        <h4>DevOps & Outils</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-dark">Git / GitHub</span>
+          <span class="skill-tag tag-dark">CI/CD</span>
+          <span class="skill-tag tag-dark">Docker</span>
+          <span class="skill-tag tag-dark">JUnit</span>
+          <span class="skill-tag tag-dark">Jira</span>
+          <span class="skill-tag tag-dark">Agile</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🌍</div>
+        <h4>Langues</h4>
+        <div class="skill-tags">
+          <span class="skill-tag tag-teal">Français</span>
+          <span class="skill-tag tag-dark">Anglais</span>
+          <span class="skill-tag tag-dark">Wolof</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PROJETS ══════════ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Réalisations</div>
+      <h2 class="section-title">Projets</h2>
+      <p class="section-lead">Des projets concrets qui mêlent développement logiciel et impact médical.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <div class="project-img" style="background: linear-gradient(135deg,#0d2137,#1a4a5a);">
+          <span style="font-size:4rem;position:relative;z-index:1;">🏥</span>
+          <div class="project-img-gradient"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">IA · Santé · Open Source</div>
+          <h3>e-TAC — Registres Médicaux IA</h3>
+          <p>Plateforme IA de numérisation et d'exploitation des registres médicaux papier. Développé dans le cadre d'un hackathon gouvernemental, ce projet open source vise à rendre les données de santé exploitables dans les structures médicales sénégalaises à ressources limitées.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span>Python</span><span>IA / OCR</span><span>Django</span><span>Open Source</span>
+            </div>
+            <a href="https://github.com/mouhamed-gueye" target="_blank" class="project-link">
+              Voir sur GitHub →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img" style="background: linear-gradient(135deg,#0d2137,#1565c0);">
+          <span style="font-size:3rem;position:relative;z-index:1;">⚽</span>
+          <div class="project-img-gradient"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Web · Django</div>
+          <h3>Site Web ASM Mbour</h3>
+          <p>Site officiel du club sportif ASM Mbour. Gestion des actualités, résultats et contenus dynamiques avec panneau d'administration.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span>Django</span><span>Python</span><span>SQLite</span>
+            </div>
+            <a href="https://github.com/mouhamed-gueye" target="_blank" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img" style="background: linear-gradient(135deg,#0d2137,#004d40);">
+          <span style="font-size:3rem;position:relative;z-index:1;">🫁</span>
+          <div class="project-img-gradient"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Deep Learning · Classification</div>
+          <h3>Pneumonia CXR Classifier</h3>
+          <p>CNN de classification de radiographies pulmonaires (Normal vs Pneumonie). Mini-challenge SPARK Academy W7 — dataset Kermany 2018.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span>PyTorch</span><span>CNN</span><span>Medical AI</span>
+            </div>
+            <a href="https://github.com/mouhamed-gueye" target="_blank" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-img" style="background: linear-gradient(135deg,#0d2137,#4a148c);">
+          <span style="font-size:3rem;position:relative;z-index:1;">🔬</span>
+          <div class="project-img-gradient"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Deep Learning · Segmentation</div>
+          <h3>Breast Lesion Segmentation</h3>
+          <p>Segmentation de lésions mammaires sur images échographiques (BUSI + BUS-BRA). Architecture U-Net + Transfer Learning — SPARK Academy W8/W9.</p>
+          <div class="project-footer">
+            <div class="project-tech">
+              <span>PyTorch</span><span>U-Net</span><span>Transfer Learning</span>
+            </div>
+            <a href="https://github.com/mouhamed-gueye" target="_blank" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PARCOURS ══════════ -->
+<section id="journey">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Mon histoire</div>
+      <h2 class="section-title">Parcours</h2>
+      <p class="section-lead">Une trajectoire atypique qui fait ma force.</p>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-col">
+        <h4>🎓 Formation</h4>
+        <div class="journey-item">
+          <div class="journey-date">2023 — Présent</div>
+          <h5>Master 2 Dev Full-Stack</h5>
+          <p>UNCHK — Architecture, DevOps, Cloud, Mobile</p>
+        </div>
+        <div class="journey-item">
+          <div class="journey-date">Fév — Mai 2026</div>
+          <h5>SPARK Academy — IA Médicale</h5>
+          <p>MAI Lab · CNN, U-Net, GANs, Transfer Learning</p>
+        </div>
+        <div class="journey-item">
+          <div class="journey-date">2019 — 2022</div>
+          <h5>Licence Informatique</h5>
+          <p>UNCHK — Développement d'applications</p>
+        </div>
+        <div class="journey-item">
+          <div class="journey-date">2019 — 2022</div>
+          <h5>Licence Sciences Infirmières</h5>
+          <p>ISS Mbour — Infirmier d'État</p>
+        </div>
+      </div>
+      <div class="journey-col">
+        <h4>💼 Expériences</h4>
+        <div class="journey-item">
+          <div class="journey-date">Fév 2025 — Déc 2025</div>
+          <h5>Infirmier d'État</h5>
+          <p>Poste de Santé Pointe Sarene</p>
+        </div>
+        <div class="journey-item">
+          <div class="journey-date">Août 2024 — Fév 2025</div>
+          <h5>Infirmier d'État</h5>
+          <p>Cabinet Médical YA SALAM — Dr Souleymane Diop, Mbour</p>
+        </div>
+        <div class="journey-item">
+          <div class="journey-date">Sep 2023 — Mars 2024</div>
+          <h5>Infirmier — Urgences</h5>
+          <p>Hôpital Thierno Mansour Barro de Mbour</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag">Contact</div>
+      <h2 class="section-title">Travaillons ensemble</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p>Vous avez un projet en santé numérique, une opportunité de stage ou de collaboration ? Je suis ouvert aux échanges.</p>
+        <div class="contact-links">
+          <a href="mailto:gueye.mouhamed625@gmail.com" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 20 20"><path d="M2 4l8 5 8-5V16H2V4zm0-2h16l-8 5L2 2z"/></svg>
+            </div>
+            <div class="contact-link-text">
+              <strong>Email</strong>
+              <span>gueye.mouhamed625@gmail.com</span>
+            </div>
+          </a>
+          <a href="tel:+221776083670" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 20 20"><path d="M2 3a2 2 0 012-2h1.5a1 1 0 01.97.757l.9 3.6a1 1 0 01-.27.99l-1.5 1.4a13 13 0 005.65 5.65l1.4-1.5a1 1 0 01.99-.27l3.6.9A1 1 0 0118 15.5V17a2 2 0 01-2 2C6.7 19 1 13.3 1 6a2 2 0 011-1z"/></svg>
+            </div>
+            <div class="contact-link-text">
+              <strong>Téléphone</strong>
+              <span>+221 77 608 36 70</span>
+            </div>
+          </a>
+          <a href="https://github.com/mouhamed-gueye" target="_blank" class="contact-link">
+            <div class="contact-link-icon">
+              <svg viewBox="0 0 20 20"><path d="M10 0C4.48 0 0 4.48 0 10c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0110 4.84c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0020 10c0-5.52-4.48-10-10-10z"/></svg>
+            </div>
+            <div class="contact-link-text">
+              <strong>GitHub</strong>
+              <span>github.com/mouhamed-gueye</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <h3>Télécharger mon CV</h3>
+        <p>Version complète avec formation, compétences, expériences et projets détaillés.</p>
+        <a href="cv.html" target="_blank" class="btn btn-primary" style="justify-content:center;width:100%;">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 000 2h8a1 1 0 000-2H6zm0 4a1 1 0 000 2h4a1 1 0 000-2H6z"/></svg>
+          Voir le CV complet
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <p>© 2026 <span>Mouhamed GUEYE</span> — Développeur Full-Stack & IA Médicale</p>
+  <p>Saly Aérodrome, Malicounda — Sénégal</p>
+</footer>
+
 </body>
 </html>
