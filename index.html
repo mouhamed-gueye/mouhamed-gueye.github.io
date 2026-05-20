@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mouhamed GUEYE — Développeur Full-Stack & IA Médicale</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d2137;
+      --teal:   #0097a7;
+      --teal-l: #e0f7fa;
+      --slate:  #455a64;
+      --light:  #f5f7fa;
+      --white:  #ffffff;
+      --border: #dde3ea;
+      --text:   #1c2b3a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    /* ── WRAPPER ── */
+    .page {
+      max-width: 950px;
+      margin: 32px auto;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.12);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 40px 48px 36px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.5px;
+    }
+
+    header h1 span { color: var(--teal); }
+
+    .tagline {
+      margin-top: 6px;
+      font-size: .85rem;
+      font-weight: 500;
+      color: #90a4ae;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      color: #b0bec5;
+      font-size: .82rem;
+    }
+
+    .contact-item .icon {
+      width: 18px;
+      height: 18px;
+      background: var(--teal);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item .icon svg { width: 10px; height: 10px; fill: white; }
+
+    .contact-item a { color: #b0bec5; text-decoration: none; }
+    .contact-item a:hover { color: var(--teal); }
+
+    /* ── BODY GRID ── */
+    .body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+    }
+
+    /* ── SIDEBAR ── */
+    aside {
+      background: var(--navy);
+      padding: 32px 28px;
+      border-top: 1px solid #1e3a52;
+    }
+
+    /* ── MAIN ── */
+    main {
+      padding: 36px 40px;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--teal-l);
+    }
+
+    aside .section-title {
+      color: #90a4ae;
+      border-bottom-color: #1e3a52;
+    }
+
+    .section { margin-bottom: 28px; }
+
+    /* ── SKILL BARS ── */
+    .skill { margin-bottom: 10px; }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .skill-name { font-size: .8rem; color: #cfd8dc; font-weight: 500; }
+    .skill-level { font-size: .72rem; color: #78909c; }
+
+    .bar-bg {
+      height: 5px;
+      background: #1e3a52;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--teal), #4dd0e1);
+      border-radius: 99px;
+    }
+
+    /* ── TAGS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag {
+      background: #1e3a52;
+      color: #90a4ae;
+      font-size: .73rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-weight: 500;
+    }
+
+    .tag.highlight {
+      background: var(--teal);
+      color: white;
+    }
+
+    /* ── LANGUAGE ── */
+    .lang-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .lang-name { font-size: .8rem; color: #cfd8dc; }
+    .lang-dots { display: flex; gap: 4px; }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #1e3a52;
+    }
+    .dot.filled { background: var(--teal); }
+
+    /* ── SOFT SKILLS ── */
+    .soft-list { list-style: none; }
+    .soft-list li {
+      font-size: .79rem;
+      color: #90a4ae;
+      padding: 3px 0;
+      padding-left: 12px;
+      position: relative;
+    }
+    .soft-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+    }
+
+    /* ── PROFILE SUMMARY ── */
+    .profile-text {
+      font-size: .85rem;
+      color: var(--slate);
+      background: var(--teal-l);
+      border-left: 3px solid var(--teal);
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 3.5px;
+      top: 16px;
+      width: 1px;
+      bottom: -12px;
+      background: var(--border);
+    }
+
+    .timeline-item:last-child::after { display: none; }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .item-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .item-date {
+      font-size: .75rem;
+      color: var(--teal);
+      font-weight: 600;
+      white-space: nowrap;
+      background: var(--teal-l);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .item-org {
+      font-size: .78rem;
+      color: var(--slate);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .item-desc {
+      font-size: .8rem;
+      color: #607d8b;
+      margin-top: 5px;
+      line-height: 1.6;
+    }
+
+    .item-desc ul { list-style: none; padding: 0; }
+    .item-desc ul li { padding-left: 12px; position: relative; margin-bottom: 2px; }
+    .item-desc ul li::before { content: '▸'; position: absolute; left: 0; color: var(--teal); }
+
+    /* ── PROJECT CARDS ── */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--light);
+      transition: border-color .2s;
+    }
+
+    .project-card:hover { border-color: var(--teal); }
+
+    .project-card h4 {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .project-card p {
+      font-size: .75rem;
+      color: var(--slate);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .badge-teal  { background: var(--teal-l); color: var(--teal); }
+    .badge-navy  { background: #e8edf2; color: var(--navy); }
+    .badge-green { background: #e8f5e9; color: #2e7d32; }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; font-size: 12px; }
+      .page { margin: 0; border-radius: 0; box-shadow: none; max-width: 100%; }
+      .project-card:hover { border-color: var(--border); }
+    }
+
+    @media (max-width: 680px) {
+      .body { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr; }
+      header { grid-template-columns: 1fr; }
+      .contacts { text-align: left; }
+      .contact-item { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════════ HEADER ══════════════ -->
+  <header>
+    <div>
+      <h1>Mouhamed <span>GUEYE</span></h1>
+      <p class="tagline">Développeur Full-Stack &nbsp;·&nbsp; IA Médicale &nbsp;·&nbsp; Infirmier d'État</p>
+    </div>
+    <div class="contacts">
+      <div class="contact-item">
+        <span>gueye.mouhamed625@gmail.com</span>
+        <div class="icon">
+          <svg viewBox="0 0 20 20"><path d="M2 4l8 5 8-5V16H2V4zm0-2h16l-8 5L2 2z"/></svg>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span>+221 776 083 670</span>
+        <div class="icon">
+          <svg viewBox="0 0 20 20"><path d="M2 3a2 2 0 012-2h1.5a1 1 0 01.97.757l.9 3.6a1 1 0 01-.27.99l-1.5 1.4a13 13 0 005.65 5.65l1.4-1.5a1 1 0 01.99-.27l3.6.9A1 1 0 0118 15.5V17a2 2 0 01-2 2C6.7 19 1 13.3 1 6a2 2 0 011-1z"/></svg>
+        </div>
+      </div>
+      <div class="contact-item">
+        <a href="https://github.com/mouhamed-gueye" target="_blank">github.com/mouhamed-gueye</a>
+        <div class="icon">
+          <svg viewBox="0 0 20 20"><path d="M10 0C4.48 0 0 4.48 0 10c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0110 4.84c.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0020 10c0-5.52-4.48-10-10-10z"/></svg>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span>Saly Aérodrome, Malicounda — Sénégal</span>
+        <div class="icon">
+          <svg viewBox="0 0 20 20"><path d="M10 1a6 6 0 016 6c0 4-6 12-6 12S4 11 4 7a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z"/></svg>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- ══════════════ SIDEBAR ══════════════ -->
+    <aside>
+
+      <!-- Compétences techniques -->
+      <div class="section">
+        <div class="section-title">Langages</div>
+        <div class="skill">
+          <div class="skill-header">
+            <span class="skill-name">Python</span>
+            <span class="skill-level">Avancé</span>
+          </div>
+          <div class="bar-bg"><div class="bar-fill" style="width:82%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span class="skill-name">Java</span>
+            <span class="skill-level">Avancé</span>
+          </div>
+          <div class="bar-bg"><div class="bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-level">Intermédiaire</span>
+          </div>
+          <div class="bar-bg"><div class="bar-fill" style="width:65%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="skill-header">
+            <span class="skill-name">SQL</span>
+            <span class="skill-level">Intermédiaire</span>
+          </div>
+          <div class="bar-bg"><div class="bar-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Frameworks &amp; Outils</div>
+        <div class="tags">
+          <span class="tag highlight">Spring Boot</span>
+          <span class="tag highlight">Django</span>
+          <span class="tag highlight">PyTorch</span>
+          <span class="tag">Angular</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Maven</span>
+          <span class="tag">Git / GitHub</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Docker</span>
+          <span class="tag">REST API</span>
+          <span class="tag">JUnit</span>
+          <span class="tag">Jira</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">IA Médicale</div>
+        <div class="tags">
+          <span class="tag highlight">CNN</span>
+          <span class="tag highlight">U-Net</span>
+          <span class="tag">Transfer Learning</span>
+          <span class="tag">GANs</span>
+          <span class="tag">Segmentation</span>
+          <span class="tag">DICOM / NIfTI</span>
+          <span class="tag">MONAI</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Bases de données</div>
+        <div class="tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Langues</div>
+        <div class="lang-item">
+          <span class="lang-name">Français</span>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div>
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Anglais</span>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div>
+            <div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+          </div>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Wolof</span>
+          <div class="lang-dots">
+            <div class="dot filled"></div><div class="dot filled"></div>
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Soft Skills</div>
+        <ul class="soft-list">
+          <li>Empathie &amp; écoute active</li>
+          <li>Travail en équipe</li>
+          <li>Résolution de problèmes</li>
+          <li>Adaptabilité</li>
+          <li>Esprit critique</li>
+          <li>Leadership</li>
+          <li>Gestion du stress</li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <!-- ══════════════ MAIN ══════════════ -->
+    <main>
+
+      <!-- Profil -->
+      <p class="profile-text">
+        Développeur Full-Stack passionné par <strong>Java et Python</strong>, avec une spécialisation émergente
+        en <strong>IA médicale</strong>. Mon parcours unique — double licence (informatique + sciences infirmières)
+        et expériences cliniques en structures de santé sénégalaises — me permet de comprendre à la fois
+        les contraintes techniques et les réalités du terrain médical.
+        Objectif : contribuer à des systèmes numériques de santé concrets et impactants en Afrique.
+      </p>
+
+      <!-- Formation -->
+      <div class="section">
+        <div class="section-title">Formation</div>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Master 2 — Conception &amp; Développement Full-Stack</div>
+                <div class="item-org">Université Numérique Cheikh Hamidou Kane (UNCHK)</div>
+              </div>
+              <span class="item-date">2023 — Présent</span>
+            </div>
+            <div class="item-desc">
+              Architecture logicielle · Design Patterns · DevOps · Cloud · Mobile · Sécurité
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Licence — Informatique Développement d'Applications</div>
+                <div class="item-org">Université Numérique Cheikh Hamidou Kane (UNCHK)</div>
+              </div>
+              <span class="item-date">2019 — 2022</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Licence — Sciences Infirmières et Obstétricales <span class="badge badge-teal" style="margin-left:6px">Infirmier d'État</span></div>
+                <div class="item-org">Institut Supérieur de Santé de Mbour</div>
+              </div>
+              <span class="item-date">2019 — 2022</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Formation complémentaire -->
+      <div class="section">
+        <div class="section-title">Formation Complémentaire</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">SPARK Academy 2026 — IA Médicale <span class="badge badge-green" style="margin-left:6px">Certifié</span></div>
+                <div class="item-org">MAI Lab · Cameroon MRI Africa (en ligne)</div>
+              </div>
+              <span class="item-date">Fév — Mai 2026</span>
+            </div>
+            <div class="item-desc">
+              <ul>
+                <li>Programme intensif 10 semaines : Python, NumPy, Pandas, PyTorch</li>
+                <li>Deep learning médical : CNN, U-Net, GANs, Transfer Learning</li>
+                <li>Mini-challenges compétitifs : classification pneumonie (CXR), segmentation lésions mammaires</li>
+                <li>Travail sur données DICOM / NIfTI — formats cliniques réels</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expériences -->
+      <div class="section">
+        <div class="section-title">Expériences Professionnelles</div>
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Infirmier d'État</div>
+                <div class="item-org">Poste de Santé Pointe Sarene</div>
+              </div>
+              <span class="item-date">Fév 2025 — Déc 2025</span>
+            </div>
+            <div class="item-desc">
+              Prise en charge des patients, soins d'urgence, gestion de dossiers médicaux.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Infirmier d'État</div>
+                <div class="item-org">Cabinet Médical YA SALAM — Dr Souleymane Diop, Mbour</div>
+              </div>
+              <span class="item-date">Août 2024 — Fév 2025</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="item-header">
+              <div>
+                <div class="item-title">Infirmier — Service d'Accueil des Urgences</div>
+                <div class="item-org">Hôpital Thierno Mansour Barro de Mbour</div>
+              </div>
+              <span class="item-date">Sep 2023 — Mars 2024</span>
+            </div>
+            <div class="item-desc">
+              Triage et prise en charge des urgences médicales et chirurgicales.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Projets -->
+      <div class="section">
+        <div class="section-title">Projets</div>
+        <div class="project-grid">
+
+          <div class="project-card">
+            <h4>e-TAC — Registres Médicaux IA</h4>
+            <p>Plateforme IA de numérisation et exploitation de registres médicaux papier. Hackathon gouvernemental — open source.</p>
+            <span class="badge badge-teal">Python</span>
+            <span class="badge badge-navy">IA / OCR</span>
+            <span class="badge badge-navy">Open Source</span>
+          </div>
+
+          <div class="project-card">
+            <h4>Site Web ASM Mbour</h4>
+            <p>Site officiel du club sportif ASM Mbour : gestion des actualités, résultats et contenus dynamiques.</p>
+            <span class="badge badge-teal">Django</span>
+            <span class="badge badge-navy">Python</span>
+            <span class="badge badge-navy">SQLite</span>
+          </div>
+
+          <div class="project-card">
+            <h4>Pneumonia CXR Classifier</h4>
+            <p>Modèle CNN de classification de radiographies pulmonaires (Normal vs Pneumonie) — SPARK Academy W7.</p>
+            <span class="badge badge-teal">PyTorch</span>
+            <span class="badge badge-navy">CNN</span>
+            <span class="badge badge-navy">Medical AI</span>
+          </div>
+
+          <div class="project-card">
+            <h4>Breast Lesion Segmentation</h4>
+            <p>Segmentation de lésions mammaires sur images échographiques avec U-Net + Transfer Learning — SPARK Academy W8/W9.</p>
+            <span class="badge badge-teal">PyTorch</span>
+            <span class="badge badge-navy">U-Net</span>
+            <span class="badge badge-navy">Medical AI</span>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
